@@ -5,7 +5,8 @@ console.log('App.js is running');
 // JSX 
 var appObj = {
   title: 'Star Wars',
-  subtitle: 'Return of the Jedi'
+  subtitle: 'Return of the Jedi',
+  options: ['One', 'Two']
 };
 var template = React.createElement(
   'div',
@@ -15,10 +16,19 @@ var template = React.createElement(
     null,
     appObj.title
   ),
-  React.createElement(
+  appObj.subtitle && React.createElement(
     'p',
     null,
     appObj.subtitle
+  ),
+  appObj.options.length ? React.createElement(
+    'p',
+    null,
+    'Here are your options'
+  ) : React.createElement(
+    'p',
+    null,
+    'No options'
   ),
   React.createElement(
     'ol',
@@ -35,10 +45,22 @@ var template = React.createElement(
     )
   )
 );
+var user = {
+  name: 'Adoniram',
+  age: 46,
+  location: 'Miami'
+};
 
-var userName = 'Mike';
-var age = 40;
-var userLocation = 'New York';
+function getLocation(location) {
+  if (location) {
+    return React.createElement(
+      'p',
+      null,
+      'Location: ',
+      location
+    );
+  }
+}
 
 var template2 = React.createElement(
   'div',
@@ -46,20 +68,15 @@ var template2 = React.createElement(
   React.createElement(
     'h1',
     null,
-    userName
+    user.name ? user.name : 'Anonymous'
   ),
-  React.createElement(
+  user.age && user.age >= 18 && React.createElement(
     'p',
     null,
-    'age: ',
-    age
+    'Age: ',
+    user.age
   ),
-  React.createElement(
-    'p',
-    null,
-    'Location: ',
-    userLocation
-  )
+  getLocation(user.location)
 );
 // The line above is JSX. The browser does not understand JSX. Using Babeljs.io, JSX was compiled to vanilla JS.
 // var template = React.createElement("h1", {

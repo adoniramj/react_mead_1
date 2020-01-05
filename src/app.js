@@ -3,28 +3,37 @@ console.log('App.js is running')
 // JSX 
 var appObj = {
   title: 'Star Wars',
-  subtitle: 'Return of the Jedi'
+  subtitle: 'Return of the Jedi',
+  options: ['One', 'Two']
 }
 var template = (
   <div>
     <h1>{appObj.title}</h1>
-    <p>{appObj.subtitle}</p>
+    {appObj.subtitle && <p>{appObj.subtitle}</p>}
+    {appObj.options.length ? <p>Here are your options</p> : <p>No options</p>}
     <ol>
       <li>Line item 1</li>
       <li>Line item 2</li>
     </ol>
   </div>
 )
+var user = {
+  name: 'Adoniram',
+  age: 46,
+  location: 'Miami'
+}
 
-var userName = 'Mike'
-var age = 40
-var userLocation = 'New York';
+function getLocation (location) {
+  if(location) {
+    return <p>Location: {location}</p>
+  }
+}
 
 var template2 = (
   <div>
-    <h1>{userName}</h1>
-    <p>age: {age}</p>
-    <p>Location: {userLocation}</p>
+    <h1>{user.name ? user.name : 'Anonymous'}</h1>
+    {(user.age && user.age >=18) && <p>Age: {user.age}</p>}
+    {getLocation(user.location)}
   </div>
 )
 // The line above is JSX. The browser does not understand JSX. Using Babeljs.io, JSX was compiled to vanilla JS.
