@@ -3,18 +3,22 @@
 console.log('App.js is running');
 
 // JSX 
+var appObj = {
+  title: 'Star Wars',
+  subtitle: 'Return of the Jedi'
+};
 var template = React.createElement(
   'div',
   null,
   React.createElement(
     'h1',
     null,
-    'Indecision app'
+    appObj.title
   ),
   React.createElement(
     'p',
     null,
-    'This is another element'
+    appObj.subtitle
   ),
   React.createElement(
     'ol',
@@ -32,23 +36,29 @@ var template = React.createElement(
   )
 );
 
+var userName = 'Mike';
+var age = 40;
+var userLocation = 'New York';
+
 var template2 = React.createElement(
   'div',
   null,
   React.createElement(
     'h1',
     null,
-    'Adoniram'
+    userName
   ),
   React.createElement(
     'p',
     null,
-    'age: 46'
+    'age: ',
+    age
   ),
   React.createElement(
     'p',
     null,
-    'Location: Miami'
+    'Location: ',
+    userLocation
   )
 );
 // The line above is JSX. The browser does not understand JSX. Using Babeljs.io, JSX was compiled to vanilla JS.
@@ -56,4 +66,4 @@ var template2 = React.createElement(
 //   id: "someid"
 // }, "This is JSX from App.js");
 var appRoot = document.getElementById('app');
-ReactDOM.render(template2, appRoot);
+ReactDOM.render(template, appRoot);
