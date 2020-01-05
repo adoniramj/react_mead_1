@@ -1,12 +1,12 @@
 console.log('App.js is running')
 
 // JSX 
-var appObj = {
+const appObj = {
   title: 'Star Wars',
   subtitle: 'Return of the Jedi',
   options: ['One', 'Two']
 }
-var template = (
+const template = (
   <div>
     <h1>{appObj.title}</h1>
     {appObj.subtitle && <p>{appObj.subtitle}</p>}
@@ -17,22 +17,22 @@ var template = (
     </ol>
   </div>
 )
-var user = {
+const user = {
   name: 'Adoniram',
   age: 46,
   location: 'Miami'
 }
 
-function getLocation (location) {
-  if(location) {
+function getLocation(location) {
+  if (location) {
     return <p>Location: {location}</p>
   }
 }
 
-var template2 = (
+const template2 = (
   <div>
     <h1>{user.name ? user.name : 'Anonymous'}</h1>
-    {(user.age && user.age >=18) && <p>Age: {user.age}</p>}
+    {(user.age && user.age >= 18) && <p>Age: {user.age}</p>}
     {getLocation(user.location)}
   </div>
 )
@@ -40,5 +40,6 @@ var template2 = (
 // var template = React.createElement("h1", {
 //   id: "someid"
 // }, "This is JSX from App.js");
-var appRoot = document.getElementById('app')
+const appRoot = document.getElementById('app')
 ReactDOM.render(template, appRoot)
+// is this working
