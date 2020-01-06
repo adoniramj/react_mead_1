@@ -17,29 +17,37 @@ const template = (
     </ol>
   </div>
 )
-const user = {
-  name: 'Adoniram',
-  age: 46,
-  location: 'Miami'
+let count = 0
+const add = () => {
+  console.log('Plus one')
 }
 
-function getLocation(location) {
-  if (location) {
-    return <p>Location: {location}</p>
-  }
+const minus = () => {
+  console.log('Minus one')
 }
 
-const template2 = (
+const reset = () => {
+  console.log('Reset')
+}
+const templateTwo = (
   <div>
-    <h1>{user.name ? user.name : 'Anonymous'}</h1>
-    {(user.age && user.age >= 18) && <p>Age: {user.age}</p>}
-    {getLocation(user.location)}
+    <h1>Count: {count}</h1>
+    <button
+      onClick={add}>+1
+    </button>
+    <button onClick={minus}>
+      -1
+    </button>
+    <button
+      onClick={reset}>reset
+    </button>
   </div>
 )
+console.log(templateTwo)
 // The line above is JSX. The browser does not understand JSX. Using Babeljs.io, JSX was compiled to vanilla JS.
 // var template = React.createElement("h1", {
 //   id: "someid"
 // }, "This is JSX from App.js");
 const appRoot = document.getElementById('app')
-ReactDOM.render(template, appRoot)
+ReactDOM.render(templateTwo, appRoot)
 // is this working
