@@ -47,48 +47,58 @@ var template = React.createElement(
 );
 var count = 0;
 var add = function add() {
+  count++;
   console.log('Plus one');
+  renderData();
 };
 
 var minus = function minus() {
+  count--;
   console.log('Minus one');
+  renderData();
 };
 
 var reset = function reset() {
+  count = 0;
   console.log('Reset');
+  renderData();
 };
-var templateTwo = React.createElement(
-  'div',
-  null,
-  React.createElement(
-    'h1',
-    null,
-    'Count: ',
-    count
-  ),
-  React.createElement(
-    'button',
-    {
-      onClick: add },
-    '+1'
-  ),
-  React.createElement(
-    'button',
-    { onClick: minus },
-    '-1'
-  ),
-  React.createElement(
-    'button',
-    {
-      onClick: reset },
-    'reset'
-  )
-);
-console.log(templateTwo);
+
 // The line above is JSX. The browser does not understand JSX. Using Babeljs.io, JSX was compiled to vanilla JS.
 // var template = React.createElement("h1", {
 //   id: "someid"
 // }, "This is JSX from App.js");
 var appRoot = document.getElementById('app');
-ReactDOM.render(templateTwo, appRoot);
-// is this working
+
+var renderData = function renderData() {
+  var templateTwo = React.createElement(
+    'div',
+    null,
+    React.createElement(
+      'h1',
+      null,
+      'Count: ',
+      count
+    ),
+    React.createElement(
+      'button',
+      {
+        onClick: add },
+      '+1'
+    ),
+    React.createElement(
+      'button',
+      { onClick: minus },
+      '-1'
+    ),
+    React.createElement(
+      'button',
+      {
+        onClick: reset },
+      'reset'
+    )
+  );
+  ReactDOM.render(templateTwo, appRoot);
+};
+
+renderData();
