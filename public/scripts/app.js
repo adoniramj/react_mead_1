@@ -45,43 +45,60 @@ var template = React.createElement(
     )
   )
 );
-var user = {
-  name: 'Adoniram',
-  age: 46,
-  location: 'Miami'
+var count = 0;
+var add = function add() {
+  count++;
+  console.log('Plus one');
+  renderData();
 };
 
-function getLocation(location) {
-  if (location) {
-    return React.createElement(
-      'p',
-      null,
-      'Location: ',
-      location
-    );
-  }
-}
+var minus = function minus() {
+  count--;
+  console.log('Minus one');
+  renderData();
+};
 
-var template2 = React.createElement(
-  'div',
-  null,
-  React.createElement(
-    'h1',
-    null,
-    user.name ? user.name : 'Anonymous'
-  ),
-  user.age && user.age >= 18 && React.createElement(
-    'p',
-    null,
-    'Age: ',
-    user.age
-  ),
-  getLocation(user.location)
-);
+var reset = function reset() {
+  count = 0;
+  console.log('Reset');
+  renderData();
+};
+
 // The line above is JSX. The browser does not understand JSX. Using Babeljs.io, JSX was compiled to vanilla JS.
 // var template = React.createElement("h1", {
 //   id: "someid"
 // }, "This is JSX from App.js");
 var appRoot = document.getElementById('app');
-ReactDOM.render(template, appRoot);
-// is this working
+
+var renderData = function renderData() {
+  var templateTwo = React.createElement(
+    'div',
+    null,
+    React.createElement(
+      'h1',
+      null,
+      'Count: ',
+      count
+    ),
+    React.createElement(
+      'button',
+      {
+        onClick: add },
+      '+1'
+    ),
+    React.createElement(
+      'button',
+      { onClick: minus },
+      '-1'
+    ),
+    React.createElement(
+      'button',
+      {
+        onClick: reset },
+      'reset'
+    )
+  );
+  ReactDOM.render(templateTwo, appRoot);
+};
+
+renderData();
