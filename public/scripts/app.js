@@ -3,102 +3,108 @@
 console.log('App.js is running');
 
 // JSX 
-var appObj = {
+var app = {
   title: 'Star Wars',
   subtitle: 'Return of the Jedi',
-  options: ['One', 'Two']
-};
-var template = React.createElement(
-  'div',
-  null,
-  React.createElement(
-    'h1',
-    null,
-    appObj.title
-  ),
-  appObj.subtitle && React.createElement(
-    'p',
-    null,
-    appObj.subtitle
-  ),
-  appObj.options.length ? React.createElement(
-    'p',
-    null,
-    'Here are your options'
-  ) : React.createElement(
-    'p',
-    null,
-    'No options'
-  ),
-  React.createElement(
-    'ol',
-    null,
-    React.createElement(
-      'li',
-      null,
-      'Line item 1'
-    ),
-    React.createElement(
-      'li',
-      null,
-      'Line item 2'
-    )
-  )
-);
-var count = 0;
-var add = function add() {
-  count++;
-  console.log('Plus one');
-  renderData();
+  options: []
 };
 
-var minus = function minus() {
-  count--;
-  console.log('Minus one');
-  renderData();
+var onFormSubmit = function onFormSubmit(e) {
+  e.preventDefault();
+  //console.log('Form submitted')
+  var option = e.target.elements.option.value;
+  if (option) {
+    app.options.push(option);
+    e.target.elements.option.value = '';
+    renderFunc();
+  }
 };
 
-var reset = function reset() {
-  count = 0;
-  console.log('Reset');
-  renderData();
+var onFormDelete = function onFormDelete(e) {
+  e.preventDefault();
+  console.log('Delete pressed');
+  app.options = [];
+  renderFunc();
 };
 
-// The line above is JSX. The browser does not understand JSX. Using Babeljs.io, JSX was compiled to vanilla JS.
-// var template = React.createElement("h1", {
-//   id: "someid"
-// }, "This is JSX from App.js");
+var removeAll = function removeAll() {
+  app.options = [];
+  renderFunc();
+};
 var appRoot = document.getElementById('app');
 
-var renderData = function renderData() {
-  var templateTwo = React.createElement(
+var renderFunc = function renderFunc() {
+  var template = React.createElement(
     'div',
     null,
     React.createElement(
       'h1',
       null,
-      'Count: ',
-      count
+      app.title
+    ),
+    app.subtitle && React.createElement(
+      'p',
+      null,
+      app.subtitle
+    ),
+    app.options.length ? React.createElement(
+      'p',
+      null,
+      'Here are your options'
+    ) : React.createElement(
+      'p',
+      null,
+      'No options'
+    ),
+    React.createElement(
+      'p',
+      null,
+      app.options.length
+    ),
+    React.createElement(
+      'form',
+      { onSubmit: onFormDelete },
+      React.createElement(
+        'button',
+        null,
+        'Delete options'
+      )
     ),
     React.createElement(
       'button',
-      {
-        onClick: add },
-      '+1'
+      { onClick: removeAll },
+      'Delete all options'
     ),
     React.createElement(
-      'button',
-      { onClick: minus },
-      '-1'
+      'ol',
+      null,
+      React.createElement(
+        'li',
+        null,
+        'Line item 1'
+      ),
+      React.createElement(
+        'li',
+        null,
+        'Line item 2'
+      )
     ),
     React.createElement(
-      'button',
-      {
-        onClick: reset },
-      'reset'
+      'form',
+      { onSubmit: onFormSubmit },
+      React.createElement('input', {
+        type: 'text',
+        name: 'option'
+      }),
+      React.createElement(
+        'button',
+        null,
+        'Add option'
+      )
     )
   );
-  ReactDOM.render(templateTwo, appRoot);
+
+  ReactDOM.render(template, appRoot);
 };
 
-renderData();
+renderFunc();
