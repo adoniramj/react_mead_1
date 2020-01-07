@@ -20,17 +20,12 @@ var onFormSubmit = function onFormSubmit(e) {
   }
 };
 
-var onFormDelete = function onFormDelete(e) {
-  e.preventDefault();
-  console.log('Delete pressed');
-  app.options = [];
-  renderFunc();
-};
-
 var removeAll = function removeAll() {
   app.options = [];
   renderFunc();
 };
+
+var numbers = [55, 101, 1001];
 var appRoot = document.getElementById('app');
 
 var renderFunc = function renderFunc() {
@@ -62,15 +57,6 @@ var renderFunc = function renderFunc() {
       app.options.length
     ),
     React.createElement(
-      'form',
-      { onSubmit: onFormDelete },
-      React.createElement(
-        'button',
-        null,
-        'Delete options'
-      )
-    ),
-    React.createElement(
       'button',
       { onClick: removeAll },
       'Delete all options'
@@ -78,16 +64,13 @@ var renderFunc = function renderFunc() {
     React.createElement(
       'ol',
       null,
-      React.createElement(
-        'li',
-        null,
-        'Line item 1'
-      ),
-      React.createElement(
-        'li',
-        null,
-        'Line item 2'
-      )
+      app.options.map(function (item, index) {
+        return React.createElement(
+          'li',
+          { key: index },
+          item
+        );
+      })
     ),
     React.createElement(
       'form',
