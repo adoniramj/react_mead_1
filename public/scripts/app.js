@@ -1,40 +1,44 @@
 'use strict';
 
-var appRoot = document.getElementById('app');
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var visibility = false;
-var hideInfo = function hideInfo() {
-  console.log('hiding info');
-  visibility = !visibility;
-  renderFunc();
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var renderFunc = function renderFunc() {
-  var template = React.createElement(
-    'div',
-    null,
-    React.createElement(
-      'h1',
-      null,
-      'Visibility Toggle'
-    ),
-    React.createElement(
-      'button',
-      { onClick: hideInfo },
-      visibility ? 'Hide details' : 'Show details'
-    ),
-    visibility && React.createElement(
-      'div',
-      null,
-      React.createElement(
-        'p',
-        null,
-        'I am being shown'
-      )
-    )
-  );
+var Person = function () {
+  //Creating an instance of Person will execute the constructor function.
+  function Person() {
+    var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Anonymous';
+    var age = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-  ReactDOM.render(template, appRoot);
-};
+    _classCallCheck(this, Person);
 
-renderFunc();
+    //console.log('test')
+    this.name = name;
+    this.age = age;
+  }
+
+  _createClass(Person, [{
+    key: 'getGretting',
+    value: function getGretting() {
+      //return 'Hi I am ' + this.name + '!'
+      return 'Hi. I am ' + this.name + '!';
+    }
+  }, {
+    key: 'getDescription',
+    value: function getDescription() {
+      return this.name + ' is ' + this.age + ' years old!';
+    }
+  }]);
+
+  return Person;
+}();
+
+var me = new Person('Adoniram Vargas', 47);
+
+console.log(me.getGretting());
+console.log(me.getDescription());
+
+var other = new Person();
+
+console.log(other.getGretting());
+console.log(other.getDescription());
