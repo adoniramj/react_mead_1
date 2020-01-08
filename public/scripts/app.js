@@ -1,37 +1,13 @@
 'use strict';
 
-console.log('App.js is running');
-
-// JSX 
-var app = {
-  title: 'Star Wars',
-  subtitle: 'Return of the Jedi',
-  options: []
-};
-
-var onFormSubmit = function onFormSubmit(e) {
-  e.preventDefault();
-  //console.log('Form submitted')
-  var option = e.target.elements.option.value;
-  if (option) {
-    app.options.push(option);
-    e.target.elements.option.value = '';
-    renderFunc();
-  }
-};
-
-var onFormDelete = function onFormDelete(e) {
-  e.preventDefault();
-  console.log('Delete pressed');
-  app.options = [];
-  renderFunc();
-};
-
-var removeAll = function removeAll() {
-  app.options = [];
-  renderFunc();
-};
 var appRoot = document.getElementById('app');
+
+var visibility = false;
+var hideInfo = function hideInfo() {
+  console.log('hiding info');
+  visibility = !visibility;
+  renderFunc();
+};
 
 var renderFunc = function renderFunc() {
   var template = React.createElement(
@@ -40,66 +16,20 @@ var renderFunc = function renderFunc() {
     React.createElement(
       'h1',
       null,
-      app.title
-    ),
-    app.subtitle && React.createElement(
-      'p',
-      null,
-      app.subtitle
-    ),
-    app.options.length ? React.createElement(
-      'p',
-      null,
-      'Here are your options'
-    ) : React.createElement(
-      'p',
-      null,
-      'No options'
-    ),
-    React.createElement(
-      'p',
-      null,
-      app.options.length
-    ),
-    React.createElement(
-      'form',
-      { onSubmit: onFormDelete },
-      React.createElement(
-        'button',
-        null,
-        'Delete options'
-      )
+      'Visibility Toggle'
     ),
     React.createElement(
       'button',
-      { onClick: removeAll },
-      'Delete all options'
+      { onClick: hideInfo },
+      visibility ? 'Hide details' : 'Show details'
     ),
-    React.createElement(
-      'ol',
+    visibility && React.createElement(
+      'div',
       null,
       React.createElement(
-        'li',
+        'p',
         null,
-        'Line item 1'
-      ),
-      React.createElement(
-        'li',
-        null,
-        'Line item 2'
-      )
-    ),
-    React.createElement(
-      'form',
-      { onSubmit: onFormSubmit },
-      React.createElement('input', {
-        type: 'text',
-        name: 'option'
-      }),
-      React.createElement(
-        'button',
-        null,
-        'Add option'
+        'I am being shown'
       )
     )
   );
