@@ -1,3 +1,24 @@
+const obj = {
+  name: 'Adoniram',
+  getName() {
+    return this.name
+  }
+}
+
+console.log(obj.getName())
+let getName = obj.getName /* The transfer of 'this' does not occur. That is why
+console.log(getName()) will produce the error -> cannot access the property 'name' of undefined because this is undefined.*/
+//console.log(getName())
+/*To fix this problem we can use the bind method*/
+
+getName = obj.getName.bind(obj)
+
+console.log(getName())
+/*You can also bind on in-line object*/
+
+getName = obj.getName.bind({name: 'Mike'})
+console.log(getName())
+
 class IndecisionApp extends React.Component {
   render() {
     const title = 'Indecision'
@@ -40,15 +61,21 @@ class Action extends React.Component {
 }
 
 class Options extends React.Component {
+
+  constructor(props) {
+    super(props) //to have access to this.props
+    this.handleRemoveAll = this.handleRemoveAll.bind(this)
+  }
+  
   handleRemoveAll() {
-    alert('Deleting all options')
+    console.log(this.props.options)
   }
 
   render() {
     console.log(this.props)
     return (
       <div>
-        <button onClick={this.handleRemoveall}>Remove all options</button>
+        <button onClick={this.handleRemoveAll.bind(this)}>Remove all options</button>
         {
           this.props.options.map(option => {
             return <Option key={option} optionText={option} />
