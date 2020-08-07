@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+
 import * as serviceWorker from './serviceWorker';
 
+const App = (props) => {
+  const [count, setCount] = useState(props.count)
+
+  return (
+    <div>
+      <p>The current count is {count}</p>
+      <button onClick={() => setCount(count + 1)}>plus one</button>
+      <button onClick={() => setCount(count - 1)}>minus one</button>
+      <button onClick={() => setCount(0)}>reset</button>
+    </div>
+  )
+}
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <App count={1}/>,
   document.getElementById('root')
 );
 
